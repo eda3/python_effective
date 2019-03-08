@@ -2,7 +2,6 @@ def to_str(bytes_or_str):
     """
 
     :param bytes_or_str:
-    :param bytes:
     :return: value:
     """
     if isinstance(bytes_or_str, bytes):
