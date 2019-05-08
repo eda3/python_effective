@@ -29,3 +29,22 @@ def sort_priority2(numbers, group):
 found = sort_priority2(numbers, group)
 print('Found:', found)
 print(numbers)
+print('')
+
+
+def sort_priority3(numbers, groups):
+    found = False
+
+    def helper(x):
+        nonlocal found
+        if x in group:
+            found = True
+            return 0, x
+        return 1, x
+
+    numbers.sort(key=helper)
+
+
+found = sort_priority2(numbers, group)
+print('Found:', found)
+print(numbers)
