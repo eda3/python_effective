@@ -1,4 +1,7 @@
-def sort_priority(values, group):
+from typing import List, Dict
+
+
+def sort_priority(values: List[int], group: Dict[int]) -> None:
     def helper(x):
         if x in group:
             return 0, x
@@ -7,25 +10,28 @@ def sort_priority(values, group):
     values.sort(key=helper)
 
 
-numbers = [8, 3, 1, 2, 5, 4, 7, 6]
-group = {2, 3, 5, 7}
+numbers: List[int] = [8, 3, 1, 2, 5, 4, 7, 6]
+group: Dict[int] = {2, 3, 5, 7}
 sort_priority(numbers, group)
 print(numbers, '\n')
+
+
 # [2, 3, 5, 7, 1, 4, 6, 8]
 
 
-def sort_priority2(numbers, group):
-    found = False
+def sort_priority2(numbers: List[int], group: Dict[int]) -> bool:
+    found: bool = False
 
     def helper(x):
         if x in group:
-            found = True  # Looks easy
+            found: bool = True  # Looks easy
             return 0, x
         return 1, 0
+
     numbers.sort(key=helper)
     return found
 
 
-found = sort_priority2(numbers, group)
+found: bool = sort_priority2(numbers, group)
 print('Found:', found)
 print(numbers)
