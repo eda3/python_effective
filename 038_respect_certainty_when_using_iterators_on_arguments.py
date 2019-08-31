@@ -1,6 +1,6 @@
 # 引数に対してイテレータを使うときには確実さを尊ぶ
 import os
-from typing import List, Callable
+from typing import List, Callable, NewType
 
 
 def normalize(numbers: List[int]) -> List[float]:
@@ -57,6 +57,16 @@ def normalize_func(get_iter: Callable) -> List[float]:
     return result
 
 
+class ReadVisits(object):
+    def __init__(self, data_path: str) -> None:
+        self.data_path: str = data_path
+
+    def __iter__(self) -> List[int]:
+        with open(self.data_path) as f:
+            for line in f:
+                yield int(line)
+
+
 if __name__ == '__main__':
     # 訪問者数リスト
     visits: List[int] = [15, 35, 80]
@@ -92,5 +102,14 @@ if __name__ == '__main__':
     # しかし、引数にlambda式を入れ込むのはめんどい
     percentages = normalize_func(lambda: read_visits(path))
     print('normalize_func(it)')
+    print('percentages:', percentages)  # [11.538461538461538, 26.923076923076923, 61.53846153846154]
+    print('---')
+
+    # イテレータプロトコルを実装したコンテナクラスを利用することで、
+    # normalize()を修正しなくても期待通りの動きになる
+    # ReadVisits = NewType('ReadVisits', List[int])
+    visits_rv: ReadVisits = ReadVisits(path)
+    percentages = normalize(visits_rv)
+    print('class ReadVisits')
     print('percentages:', percentages)  # [11.538461538461538, 26.923076923076923, 61.53846153846154]
     print('---')
