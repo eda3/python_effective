@@ -1,5 +1,5 @@
 # 可変長位置引数を使って、見た目をすっきりさせる
-from typing import List
+from typing import List, Tuple
 
 
 def log(message: str, values: List[int]) -> None:
@@ -10,7 +10,7 @@ def log(message: str, values: List[int]) -> None:
         print(f'{message}, {values_str}')
 
 
-def log2(message: str, *values: int) -> None:
+def log2(message: str, *values: Tuple[int]) -> None:
     if not values:
         print(message)
     else:
