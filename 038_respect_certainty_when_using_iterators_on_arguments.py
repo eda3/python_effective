@@ -1,6 +1,6 @@
 # 引数に対してイテレータを使うときには確実さを尊ぶ
 import os
-from typing import List
+from typing import List, Callable
 
 
 def normalize(numbers: List[int]) -> List[float]:
@@ -43,6 +43,20 @@ def normalize_copy(numbers: List[int]) -> List[float]:
     return result
 
 
+def normalize_func(get_iter: Callable) -> List[float]:
+    """引数をパーセント割合に変換する
+
+    :param get_iter: 変換したいリスト
+    :return: 変換後リスト
+    """
+    total: int = sum(get_iter())
+    result: List[float] = []
+    for value in get_iter():
+        percent: float = 100 * value / total
+        result.append(percent)
+    return result
+
+
 if __name__ == '__main__':
     # 訪問者数リスト
     visits: List[int] = [15, 35, 80]
@@ -71,3 +85,8 @@ if __name__ == '__main__':
     print('percentages:', percentages)  # [11.538461538461538, 26.923076923076923, 61.53846153846154]
 
     print('---')
+
+    # 呼ばれるたびに新たなイテレータを返す関数を渡してあげれば、
+    # 巨大なファイル読み込み問題は回避できる
+    percentages = normalize_func(lambda: read_visits(path))
+    print('percentages:', percentages)  # [11.538461538461538, 26.923076923076923, 61.53846153846154]
