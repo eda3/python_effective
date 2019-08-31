@@ -28,6 +28,21 @@ def read_visits(data_path: str) -> List[int]:
             yield int(line)
 
 
+def normalize_copy(numbers: List[int]) -> List[float]:
+    """引数をパーセント割合に変換する
+
+    :param numbers: 変換したいリスト
+    :return: 変換後リスト
+    """
+    numbers = list(numbers)  # イテレータをコピー
+    total: int = sum(numbers)
+    result: List[float] = []
+    for value in numbers:
+        percent: float = 100 * value / total
+        result.append(percent)
+    return result
+
+
 if __name__ == '__main__':
     # 訪問者数リスト
     visits: List[int] = [15, 35, 80]
@@ -43,3 +58,15 @@ if __name__ == '__main__':
 
     # イテレータは結果を一つしか出力しないので、空リストになる
     print('percentages:', percentages)  # []
+
+    print('---')
+
+    # ファイルから訪問者を読み込み、パーセント割合に変換する
+    it = read_visits('data' + os.sep + '038_my_numbers.txt')
+    percentages = normalize_copy(it)  # イテレータのコピーを作る
+
+    # 期待通りの動きになるが、訪問者リストファイルが巨大だった場合、
+    # メモリがクラッシュする可能性がある
+    print('percentages:', percentages)  # [11.538461538461538, 26.923076923076923, 61.53846153846154]
+
+    print('---')
