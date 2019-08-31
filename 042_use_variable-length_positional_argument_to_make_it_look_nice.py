@@ -28,6 +28,7 @@ if __name__ == '__main__':
     print('---')
 
     # 関数に可変長引数を用いることで、引数を省略することができる
+    # 注意する点として、可変長引数を用いるとタプル型に変換される
     print('# function log2()')
     log2('My number are', 1, 2, 3)
     log2('Hi there')  # ずっと良い！
