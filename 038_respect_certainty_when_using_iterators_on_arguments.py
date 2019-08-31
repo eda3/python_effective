@@ -67,6 +67,17 @@ class ReadVisits(object):
                 yield int(line)
 
 
+def normalize_defensive(numbers: ReadVisits):
+    if iter(numbers) is iter(numbers):
+        raise TypeError('Must supply a container')  # イテレータなので良くない！コンテナ型にするべし
+    total: int = sum(numbers)
+    result: List[float] = []
+    for value in numbers:
+        percent: float = 100 * value / total
+        result.append(percent)
+    return result
+
+
 if __name__ == '__main__':
     # 訪問者数リスト
     visits: List[int] = [15, 35, 80]
@@ -109,7 +120,7 @@ if __name__ == '__main__':
     # normalize()を修正しなくても期待通りの動きになる
     # ReadVisits = NewType('ReadVisits', List[int])
     visits_rv: ReadVisits = ReadVisits(path)
-    percentages = normalize(visits_rv)
+    percentages = normalize_defensive(visits_rv)
     print('class ReadVisits')
     print('percentages:', percentages)  # [11.538461538461538, 26.923076923076923, 61.53846153846154]
     print('---')
