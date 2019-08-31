@@ -62,8 +62,8 @@ if __name__ == '__main__':
     visits: List[int] = [15, 35, 80]
     percentages: List[float] = normalize(visits)
 
+    print('normalize(visits)')
     print('percentages:', percentages)  # [11.538461538461538, 26.923076923076923, 61.53846153846154]
-
     print('---')
 
     # ファイルから訪問者を読み込み、パーセント割合に変換する
@@ -72,8 +72,8 @@ if __name__ == '__main__':
     percentages = normalize(it)
 
     # イテレータは結果を一つしか出力しないので、空リストになる
+    print('normalize(it)')
     print('percentages:', percentages)  # []
-
     print('---')
 
     # ファイルから訪問者を読み込み、パーセント割合に変換する
@@ -82,11 +82,15 @@ if __name__ == '__main__':
 
     # 期待通りの動きになるが、訪問者リストファイルが巨大だった場合、
     # メモリがクラッシュする可能性がある
+    print('normalize_copy(it)')
     print('percentages:', percentages)  # [11.538461538461538, 26.923076923076923, 61.53846153846154]
-
     print('---')
 
+    # 期待通りの動きになるが、訪問者リストファイルが巨大だった場合、
     # 呼ばれるたびに新たなイテレータを返す関数を渡してあげれば、
     # 巨大なファイル読み込み問題は回避できる
+    # しかし、引数にlambda式を入れ込むのはめんどい
     percentages = normalize_func(lambda: read_visits(path))
+    print('normalize_func(it)')
     print('percentages:', percentages)  # [11.538461538461538, 26.923076923076923, 61.53846153846154]
+    print('---')
