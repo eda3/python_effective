@@ -53,7 +53,8 @@ if __name__ == '__main__':
     print('---')
 
     # ファイルから訪問者を読み込み、パーセント割合に変換する
-    it = read_visits('data' + os.sep + '038_my_numbers.txt')
+    path: str = 'data' + os.sep + '038_my_numbers.txt'
+    it = read_visits(path)
     percentages = normalize(it)
 
     # イテレータは結果を一つしか出力しないので、空リストになる
@@ -62,7 +63,7 @@ if __name__ == '__main__':
     print('---')
 
     # ファイルから訪問者を読み込み、パーセント割合に変換する
-    it = read_visits('data' + os.sep + '038_my_numbers.txt')
+    it = read_visits(path)
     percentages = normalize_copy(it)  # イテレータのコピーを作る
 
     # 期待通りの動きになるが、訪問者リストファイルが巨大だった場合、
