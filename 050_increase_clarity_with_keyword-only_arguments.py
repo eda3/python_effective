@@ -17,5 +17,9 @@ def safe_division(number: float, divisor: int, ignore_overflow: bool, ignore_zer
 
 
 if __name__ == '__main__':
+    # 割り算でのfloatのオーバーふr−が無視され、0が返される
     result: float = safe_division(1.0, 10 ** 500, True, False)
     print(result)  # 0
+
+    result: float = safe_division(1.0, 0, False, True)
+    print(result)  # inf
