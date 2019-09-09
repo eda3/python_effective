@@ -10,11 +10,10 @@ def safe_division(number: float, divisor: int, ignore_overflow: bool, ignore_zer
         else:
             raise
     except ZeroDivisionError:
-        if ignore_overflow:
-            if ignore_zero_division:
-                return float('inf')
-            else:
-                raise
+        if ignore_zero_division:
+            return float('inf')
+        else:
+            raise
 
 
 if __name__ == '__main__':
