@@ -63,8 +63,12 @@ class SimpleGradebook(object):
 
 
 if __name__ == '__main__':
+    # 追加する学生の名前を設定
     student_name: str = 'Isaac Newton'
     book: SimpleGradebook = SimpleGradebook()
+
+    # 学生に複数の成績スコアを与え、平均点を表示
     book.add_student(student_name)
-    book.report_grade(student_name, 90)
+    book.report_grade(student_name, 100)
+    book.report_grade(student_name, 0)
     print(book.average_grade(student_name))
