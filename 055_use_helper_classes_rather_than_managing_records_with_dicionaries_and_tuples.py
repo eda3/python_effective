@@ -55,7 +55,7 @@ class SimpleGradebook(object):
         記録した成績データを取得する
 
         Returns:
-            Dict[str, List[int]]: 取得する成績データ
+            Dict[str, List[int]]: 成績データ
 
         """
 
