@@ -72,3 +72,4 @@ if __name__ == '__main__':
     book.report_grade(student_name, 100)
     book.report_grade(student_name, 0)
     print(book.average_grade(student_name))
+    print('---')
