@@ -10,7 +10,7 @@ def log_missing() -> int:
 if __name__ == "__main__":
     # List型のsortメソッドにのオプションとしてkey引数を取り、
     # keyフックとしてlambda式を与えてソートする
-    names: List[str] = ['Socrates', 'Archimedes', 'Plato', 'Aristotle']
+    names: List[str] = ["Socrates", "Archimedes", "Plato", "Aristotle"]
     names.sort(key=lambda x: len(x))
     print(names)
     # >>> ['Plato', 'Socrates', 'Archimedes', 'Aristotle']
