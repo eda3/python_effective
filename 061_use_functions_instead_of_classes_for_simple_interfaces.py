@@ -30,6 +30,43 @@ def use_log_missing():
     # >> After:  {'green': 12, 'blue': 20, 'red': 5, 'orange': 9}
 
 
+class CountMissing(object):
+    def __init__(self):
+        self.added = 0
+
+    def missing(self) -> int:
+        print("Key added")
+        self.added += 1
+        return 0
+
+
+def use_class_count_missing() -> None:
+    current: Dict[str, int] = {"green": 12, "blue": 3}
+    increments: List[Tuple[str, int]] = [("red", 5), ("blue", 17), ("orange", 9)]
+    """ 
+    ヘルパークラスを利用した例。counter内のメソッドmissing()が状態を持つ。
+    しかしこの書き方だと、CountMissingクラスの目的が何であるかわからず、
+    誰がmissingメソッドを呼ぶのか分からない
+    """
+    counter = CountMissing()
+    result = defaultdict(counter.missing, current)
+
+    print("Before:", dict(result))
+
+    for key, amount in increments:
+        result[key] += amount
+    print("counter.added:", counter.added)
+    print("After:", dict(result))
+
+    # >>  Before: {'green':12, 'blue':3}
+    # >>  Key
+    # >>  added
+    # >>  Key
+    # >>  added
+    # >>  counter.added: 2
+    # >>  After: {'green':12, 'blue':20, 'red':5, 'orange':9}
+
+
 if __name__ == "__main__":
     # List型のsortメソッドにのオプションとしてkey引数を取り、
     # keyフックとしてlambda式を与えてソートする
@@ -42,3 +79,8 @@ if __name__ == "__main__":
 
     # 関数log_missingを利用する
     use_log_missing()
+
+    print("---")
+
+    # クラスCountMissingを利用する
+    use_class_count_missing()
