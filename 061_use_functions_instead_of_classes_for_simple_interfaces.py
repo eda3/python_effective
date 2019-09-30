@@ -43,13 +43,50 @@ class CountMissing(object):
 def use_class_count_missing() -> None:
     current: Dict[str, int] = {"green": 12, "blue": 3}
     increments: List[Tuple[str, int]] = [("red", 5), ("blue", 17), ("orange", 9)]
-    """ 
+    """
     ヘルパークラスを利用した例。counter内のメソッドmissing()が状態を持つ。
     しかしこの書き方だと、CountMissingクラスの目的が何であるかわからず、
     誰がmissingメソッドを呼ぶのか分からない
     """
     counter = CountMissing()
     result = defaultdict(counter.missing, current)
+
+    print("Before:", dict(result))
+
+    for key, amount in increments:
+        result[key] += amount
+    print("counter.added:", counter.added)
+    print("After:", dict(result))
+
+    # >>  Before: {'green':12, 'blue':3}
+    # >>  Key
+    # >>  added
+    # >>  Key
+    # >>  added
+    # >>  counter.added: 2
+    # >>  After: {'green':12, 'blue':20, 'red':5, 'orange':9}
+
+
+class BetterCountMissing(object):
+    def __init__(self):
+        self.added = 0
+
+    def __call__(self) -> int:
+        print("Key added")
+        self.added += 1
+        return 0
+
+
+def use_class_better_count_missing() -> None:
+    current: Dict[str, int] = {"green": 12, "blue": 3}
+    increments: List[Tuple[str, int]] = [("red", 5), ("blue", 17), ("orange", 9)]
+    """
+    特殊メソッド__call__を使うことで、そのクラスが関数引数として使われるということを示唆する。
+    また、クラスの目的が状態を持つ関数として動くであるという手がかりを与える
+
+    """
+    counter = BetterCountMissing()
+    result = defaultdict(counter, current)
 
     print("Before:", dict(result))
 
@@ -84,3 +121,8 @@ if __name__ == "__main__":
 
     # クラスCountMissingを利用する
     use_class_count_missing()
+
+    print("---")
+
+    # クラスBetterCountMissingを利用する
+    use_class_better_count_missing()
