@@ -31,5 +31,14 @@ class Worker(object):
         raise NotImplementedError
 
 
+class LineCountWorker(Worker):
+    def map(self):
+        data = self.input_data.read()
+        self.result = data.count("\n")
+
+    def reduce(self, other):
+        self.result += other.result
+
+
 if __name__ == "__main__":
     pass
