@@ -1,13 +1,15 @@
 # @classmethodポリモルフィズムを使ってオブジェクトをジェネリックに構築する
 
+# 特定のディレクトリ配下のテキストファイルの合計行数を出す処理
+
 import os
 from threading import Thread
 from typing import List
 
 
 class InputData(object):
-    """ 入力データを表す共通クラス
-
+    """
+    入力データを表す共通クラス
     """
 
     def read(self):
@@ -15,7 +17,11 @@ class InputData(object):
 
 
 class PathInputData(InputData):
-    def __init__(self, path):
+    """
+    入力データオープンクラス
+    """
+
+    def __init__(self, path: str):
         super().__init__()
         self.path = path
 
@@ -24,9 +30,13 @@ class PathInputData(InputData):
 
 
 class Worker(object):
-    def __init__(self, input_data):
-        self.input_data = input_data
-        self.result = None
+    """
+    行数カウント用共通クラス
+    """
+
+    def __init__(self, input_data: str):
+        self.input_data: str = input_data
+        self.result: int = None
 
     def map(self):
         raise NotImplementedError
@@ -36,6 +46,10 @@ class Worker(object):
 
 
 class LineCountWorker(Worker):
+    """
+    行数カウントクラス
+    """
+
     def map(self):
         data = self.input_data.read()
         self.result = data.count("\n")
@@ -44,23 +58,44 @@ class LineCountWorker(Worker):
         self.result += other.result
 
 
-def generate_inputs(data_dir):
-    """ インプット用のファイルを生成する
-    ディレクトリの内容をリストしてそこに含まれる各ファイルに対する
-    PathInputDataを作成する
+def generate_inputs(data_dir: str) -> PathInputData:
+    """ インプット用のファイルパスを返却する
+
+    Args:
+        data_dir (str):
+
+    Returns:
+        PathInputData
     """
+
     for name in os.listdir(data_dir):
         yield PathInputData(os.path.join(data_dir, name))
 
 
-def create_workers(input_list: List[str]):
-    workers = []
+def create_workers(input_list: PathInputData) -> List[LineCountWorker]:
+    """行数を持つworkerリストを作成する
+
+    Args:
+        input_list (List[str]):
+
+    Returns:
+        workers (List[LineCountWorker]):
+    """
+    workers: List[LineCountWorker] = []
     for input_data in input_list:
         workers.append(LineCountWorker(input_data))
     return workers
 
 
-def execute(workers):
+def execute(workers: List[LineCountWorker]) -> int:
+    """
+    Args:
+        workers (List[LineCountWorker]):
+
+    Returns:
+        first.result (int):
+
+    """
     threads = [Thread(target=w.map) for w in workers]
     for thread in threads:
         thread.start()
