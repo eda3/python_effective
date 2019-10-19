@@ -1,8 +1,6 @@
 # 単純なインターフェースにはクラスの代わりに関数を使う
 from collections import defaultdict
 from typing import Dict, Tuple
-
-# 単純なインターフェースにはクラスの代わりに関数を使う
 from typing import List
 
 

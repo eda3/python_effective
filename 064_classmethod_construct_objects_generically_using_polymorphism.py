@@ -2,6 +2,7 @@
 
 import os
 from threading import Thread
+from typing import List
 
 
 class InputData(object):
@@ -44,7 +45,7 @@ class LineCountWorker(Worker):
 
 
 def generate_inputs(data_dir):
-    """
+    """ インプット用のファイルを生成する
     ディレクトリの内容をリストしてそこに含まれる各ファイルに対する
     PathInputDataを作成する
     """
@@ -52,7 +53,7 @@ def generate_inputs(data_dir):
         yield PathInputData(os.path.join(data_dir, name))
 
 
-def create_workers(input_list):
+def create_workers(input_list: List[str]):
     workers = []
     for input_data in input_list:
         workers.append(LineCountWorker(input_data))
@@ -72,7 +73,7 @@ def execute(workers):
     return first.result
 
 
-def reduce_map(data_dir):
+def reduce_map(data_dir: str):
     inputs = generate_inputs(data_dir)
     workers = create_workers(inputs)
     return execute(workers)
