@@ -1,0 +1,13 @@
+@startuml
+(*)  --> "write_test_files()"
+--> "reduce_map(tmp_dir)"
+--> "generate_inputs(data_dir) -> inputs: PathInputData"
+
+If "input is verbose" then
+--> [Yes] "turn on verbosity"
+--> "run command"
+else
+--> "run command"
+Endif
+-->(*)
+@enduml

@@ -62,10 +62,10 @@ def create_workers(input_list: List[str]):
 
 def execute(workers):
     threads = [Thread(target=w.map) for w in workers]
-    for threads in threads:
-        threads.start()
-    for threads in threads:
-        threads.join()
+    for thread in threads:
+        thread.start()
+    for thread in threads:
+        thread.join()
 
     first, rest = workers[0], workers[1:]
     for worker in rest:
