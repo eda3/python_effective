@@ -3,6 +3,7 @@
 # 特定のディレクトリ配下のテキストファイルの合計行数を出す処理
 
 import os
+from tempfile import TemporaryDirectory
 from threading import Thread
 from typing import List
 
@@ -113,6 +114,29 @@ def reduce_map(data_dir: str):
     inputs: PathInputData = generate_inputs(data_dir)
     workers = create_workers(inputs)
     return execute(workers)
+
+
+def write_test_files(tmpdir: str):
+    """試験用のファイルを作成する
+
+    Args:
+        tmpdir (str):
+
+    Returns:
+        None
+    """
+    with open(os.path.join(tmpdir, "test.txt"), "w") as f:
+        f.write("aaaaaa\nbbbbbbbb\nccccccccc\n")
+
+    with open(os.path.join(tmpdir, "test2.txt"), "w") as f:
+        f.write("AAAAA\nBBBBBBBB\nCCCCCC\n")
+
+
+def main():
+    with TemporaryDirectory() as tmpdir:
+        write_test_files(tmpdir)
+        result: int = reduce_map(tmpdir)
+        print("result: ", result)
 
 
 if __name__ == "__main__":
