@@ -23,7 +23,7 @@ class PathInputData(InputData):
 
     def __init__(self, path: str):
         super().__init__()
-        self.path = path
+        self.path: str = path
 
     def read(self):
         return open(self.path).read()
@@ -102,14 +102,15 @@ def execute(workers: List[LineCountWorker]) -> int:
     for thread in threads:
         thread.join()
 
-    first, rest = workers[0], workers[1:]
+    first: LineCountWorker = workers[0]
+    rest: LineCountWorker = workers[1:]
     for worker in rest:
         first.reduce(worker)
     return first.result
 
 
 def reduce_map(data_dir: str):
-    inputs = generate_inputs(data_dir)
+    inputs: PathInputData = generate_inputs(data_dir)
     workers = create_workers(inputs)
     return execute(workers)
 
