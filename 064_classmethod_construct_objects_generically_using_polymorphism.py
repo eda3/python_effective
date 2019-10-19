@@ -53,7 +53,7 @@ class LineCountWorker(Worker):
 
     def map(self):
         data = self.input_data.read()
-        self.result = data.count("\n")
+        self.result: int = data.count("\n")
 
     def reduce(self, other):
         self.result += other.result
