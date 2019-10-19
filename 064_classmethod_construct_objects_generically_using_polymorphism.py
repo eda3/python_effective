@@ -1,5 +1,8 @@
 # @classmethodポリモルフィズムを使ってオブジェクトをジェネリックに構築する
 
+import os
+from threading import Thread
+
 
 class InputData(object):
     """ 入力データを表す共通クラス
