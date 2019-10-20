@@ -37,7 +37,7 @@ class Worker(object):
 
     def __init__(self, input_data: str):
         self.input_data: str = input_data
-        self.result: int = None
+        self.result: int = 0
 
     def map(self):
         raise NotImplementedError
@@ -84,6 +84,7 @@ def create_workers(input_list: PathInputData) -> List[LineCountWorker]:
     """
     workers: List[LineCountWorker] = []
     for input_data in input_list:
+        # クラスをべた書きにしてるのはよくない・・・？
         workers.append(LineCountWorker(input_data))
     return workers
 
