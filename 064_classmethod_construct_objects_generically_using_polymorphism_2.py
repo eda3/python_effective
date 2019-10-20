@@ -12,6 +12,7 @@ class GenericInputData(object):
     """
     ジェネリックな入力データを表す共通クラス
     """
+
     def read(self):
         raise NotImplementedError
 
@@ -24,6 +25,7 @@ class PathInputData(GenericInputData):
     """
     入力データオープンクラス
     """
+
     def __init__(self, path: str):
         super().__init__()
         self.path: str = path
@@ -42,6 +44,7 @@ class GenericWorker(object):
     """
     ジェネリックな行数カウント用共通クラス
     """
+
     def __init__(self, input_data: str):
         self.input_data: str = input_data
         self.result: int = 0
@@ -53,8 +56,9 @@ class GenericWorker(object):
         raise NotImplementedError
 
     @classmethod
-    def create_workers(cls, input_class: PathInputData,
-                       config: Dict[str]) -> List["GenericWorker"]:
+    def create_workers(
+        cls, input_class: PathInputData, config: Dict[str]
+    ) -> List["GenericWorker"]:
         """ 入力データに対する操作を行うインスタンスworkerを作成する
 
         Args:
@@ -75,6 +79,7 @@ class LineCountWorker(GenericWorker):
     """
     行数カウントクラス
     """
+
     def map(self):
         data = self.input_data.read()
         self.result: int = data.count("\n")
