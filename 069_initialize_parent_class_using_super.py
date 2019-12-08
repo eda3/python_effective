@@ -6,6 +6,11 @@ def main():
     print("pf.value", pf.value)
 
 
+class MyBaseClass(object):
+    def __init__(self, value):
+        self.value = value
+
+
 class TimesTwo(object):
     value = 0
 
