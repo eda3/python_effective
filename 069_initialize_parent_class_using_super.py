@@ -8,6 +8,9 @@ def main():
     foo = OneWay(5)
     print("First ordering is ( 5 * 2 ) + 5 = ", foo.value)
 
+    bar = AnotherWay(5)
+    print("Second ordering still is", bar.value)
+
 
 class MyBaseClass(object):
     def __init__(self, value):
@@ -29,6 +32,13 @@ class PlusFive(object):
 
 
 class OneWay(MyBaseClass, TimesTwo, PlusFive):
+    def __init__(self, value):
+        MyBaseClass.__init__(self, value)
+        TimesTwo.__init__(self)
+        PlusFive.__init__(self)
+
+
+class AnotherWay(MyBaseClass, PlusFive, TimesTwo):
     def __init__(self, value):
         MyBaseClass.__init__(self, value)
         TimesTwo.__init__(self)
