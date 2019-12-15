@@ -11,6 +11,13 @@ def main():
     bar = AnotherWay(5)
     print("Second ordering still is", bar.value)
 
+    print("")
+    tf = TimesFive(5)
+    print("tf.value", tf.value)
+
+    pt = PlusTwo(2)
+    print("pt.value", pt.value)
+
 
 class MyBaseClass(object):
     def __init__(self, value):
@@ -43,6 +50,18 @@ class AnotherWay(MyBaseClass, PlusFive, TimesTwo):
         MyBaseClass.__init__(self, value)
         TimesTwo.__init__(self)
         PlusFive.__init__(self)
+
+
+class TimesFive(MyBaseClass):
+    def __init__(self, value):
+        MyBaseClass.__init__(self, value)
+        self.value *= 5
+
+
+class PlusTwo(MyBaseClass):
+    def __init__(self, value):
+        MyBaseClass.__init__(self, value)
+        self.value += 2
 
 
 if __name__ == "__main__":
