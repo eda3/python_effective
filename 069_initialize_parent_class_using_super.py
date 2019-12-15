@@ -18,10 +18,21 @@ def main():
     pt = PlusTwo(2)
     print("pt.value", pt.value)
 
+    print("")
+
+    tw = ThisWay(5)
+    print("Should be ( 5 * 5) + 2 = 27 but is", tw.value)
+    # ダイヤモンド継承しているため、27と出るところが7になってしまう
+    # >>> Should be ( 5 * 5) + 2 = 27 but is 7
+
 
 class MyBaseClass(object):
+    value = 0
+
     def __init__(self, value):
+        print("MyBaseClass() before", self.value)
         self.value = value
+        print("MyBaseClass() after", self.value)
 
 
 class TimesTwo(object):
@@ -55,13 +66,23 @@ class AnotherWay(MyBaseClass, PlusFive, TimesTwo):
 class TimesFive(MyBaseClass):
     def __init__(self, value):
         MyBaseClass.__init__(self, value)
+        print("TimesFive() before", self.value)
         self.value *= 5
+        print("TimesFive() after", self.value)
 
 
 class PlusTwo(MyBaseClass):
     def __init__(self, value):
         MyBaseClass.__init__(self, value)
+        print("PlusTwo() before", self.value)
         self.value += 2
+        print("PlusTwo() after", self.value)
+
+
+class ThisWay(TimesFive, PlusTwo):
+    def __init__(self, value):
+        TimesFive.__init__(self, value)
+        PlusTwo.__init__(self, value)
 
 
 if __name__ == "__main__":
