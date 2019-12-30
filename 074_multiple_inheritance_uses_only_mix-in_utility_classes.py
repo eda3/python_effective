@@ -44,12 +44,20 @@ class ToDictMixin(object):
 
         """
         if isinstance(value, ToDictMixin):
+            print("## is ToDictMixin")
+            print("")
             return value.to_dict()
         elif isinstance(value, dict):
+            print("## is dict")
+            print("")
             return self._traverse_dict(value)
         elif isinstance(value, list):
+            print("## is list")
+            print("")
             return [self._traverse(key, i) for i in value]
         elif hasattr(value, "__dict__"):
+            print("## is __dict__")
+            print("")
             return self._traverse_dict(value.__dict__)
         else:
             return value
