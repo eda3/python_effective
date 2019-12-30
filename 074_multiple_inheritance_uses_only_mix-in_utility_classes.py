@@ -61,6 +61,13 @@ class BinaryTree(ToDictMixin):
     """
 
     def __init__(self, value, left=None, right=None):
+        """
+
+        Args:
+            value ():
+            left ():
+            right ():
+        """
         self.value = value
         self.left = left
         self.right = right
