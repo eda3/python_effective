@@ -31,7 +31,7 @@ class ToDictMixin(object):
         for key, value in instance_dict.items():
             output[key] = self._traverse(key, value)
 
-        return self._traverse_dict(self.__dict__)
+        return output
 
     def _traverse(self, key: object, value: object):
         """
