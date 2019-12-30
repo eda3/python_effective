@@ -33,12 +33,12 @@ class ToDictMixin(object):
 
         return self._traverse_dict(self.__dict__)
 
-    def _traverse(self, key, value):
+    def _traverse(self, key: object, value: object):
         """
 
         Args:
-            key ():
-            value ():
+            key (object):
+            value (object):
 
         Returns:
 
