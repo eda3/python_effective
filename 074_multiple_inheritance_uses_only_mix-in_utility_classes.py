@@ -8,6 +8,15 @@ class ToDictMixin(object):
 
     """
 
+    def to_dict(self):
+        """辞書型に変換
+
+        Returns:
+
+
+        """
+        return self._traverse_dict(self.__dict__)
+
     def _traverse_dict(self, instance_dict: Dict):
         """辞書型に変換
 
