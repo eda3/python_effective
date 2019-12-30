@@ -21,8 +21,8 @@ def main():
     print("")
 
     tw = ThisWay(5)
+    print("# ダイヤモンド継承しているため、27と出てほしいところが7になってしまう")
     print("Should be ( 5 * 5) + 2 = 27 but is", tw.value)
-    # ダイヤモンド継承しているため、27と出るところが7になってしまう
     # >>> Should be ( 5 * 5) + 2 = 27 but is 7
 
 
