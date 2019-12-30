@@ -6,7 +6,7 @@ class ToDictMixin(object):
 
     """
 
-    def to_dict(self):
+    def _traverse_dict(self, instance_dict: Dict):
         """辞書型に変換
 
         Returns:
