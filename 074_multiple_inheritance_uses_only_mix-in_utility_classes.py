@@ -82,7 +82,14 @@ class BinaryTree(ToDictMixin):
 
 
 def main():
-    pass
+    tree = BinaryTree(
+        10,
+        left=BinaryTree(7, right=BinaryTree(9)),
+        right=BinaryTree(13, left=BinaryTree(11)),
+    )
+    print(tree)
+    # tree = BinaryTree(10, 2)
+    print(tree.to_dict())
 
 
 if __name__ == "__main__":
