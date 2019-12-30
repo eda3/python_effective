@@ -20,9 +20,17 @@ class ToDictMixin(object):
     def _traverse_dict(self, instance_dict: Dict):
         """辞書型に変換
 
+        Args:
+            instance_dict (Dict):
+
         Returns:
+            Dict: 変換後の辞書型オプジェクト
 
         """
+        output: Dict = {}
+        for key, value in instance_dict.items():
+            output[key] = self._traverse(key, value)
+
         return self._traverse_dict(self.__dict__)
 
     def _traverse(self, key, value):
