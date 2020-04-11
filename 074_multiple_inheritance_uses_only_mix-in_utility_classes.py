@@ -81,6 +81,12 @@ class BinaryTree(ToDictMixin):
         self.right = right
 
 
+class BinaryTreeWithParent(BinaryTree):
+    def __init__(self, value, left=None, right=None, parent=None):
+        super().__init__(value, left=left, right=right)
+        self.parent = parent
+
+
 def main():
     tree = BinaryTree(
         10,
